@@ -25,13 +25,6 @@ CREATE TABLE empresa (
     CONSTRAINT fk_endereco_empresa FOREIGN KEY (fk_endereco) REFERENCES endereco(id_endereco)
 ) AUTO_INCREMENT = 1000;
 
-CREATE TABLE processo_perm (
-    id_processo INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(45),
-    perm CHAR(1) NOT NULL,
-    CONSTRAINT fk_empresa_processo_perm FOREIGN KEY (id_processo) REFERENCES empresa(id_empresa)
-);
-
 CREATE TABLE parametro_alerta (
     id_parametro INT PRIMARY KEY,
     max_cpu DECIMAL(4, 1),
@@ -60,10 +53,11 @@ CREATE TABLE funcionario (
     CONSTRAINT fk_empresa_funcionario FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-CREATE TABLE apontamento (
+CREATE TABLE questionario (
     id_apontamento INT PRIMARY KEY AUTO_INCREMENT,
-    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    nota INT,
     detalhe VARCHAR(2000),
+    dt_criacao DATE DEFAULT (CURRENT_DATE),
     fk_funcionario INT NOT NULL,
     CONSTRAINT fk_apontamento_funcionario FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
 );
@@ -74,12 +68,12 @@ CREATE TABLE tarefa (
     dt_fim DATE,
     dt_inicio DATE,
     concluida TINYINT DEFAULT 0,
-    dt_concluida DATE DEFAULT (CURRENT_DATE),
+    dt_hora_concluida DATETIME DEFAULT CURRENT_TIMESTAMP,
     fk_funcionario INT NOT NULL,
     fk_gerente INT NOT NULL,
     CONSTRAINT fk_funcionario_tarefa FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario),
     CONSTRAINT fk_gerente_tarefa FOREIGN KEY (fk_gerente) REFERENCES funcionario(id_funcionario)
-);
+);  
 
 CREATE TABLE usuario (
     id_usuario INT PRIMARY KEY,
@@ -92,7 +86,7 @@ CREATE TABLE usuario (
 CREATE TABLE tempo_ociosidade (
     id_tempo_ociosidade INT PRIMARY KEY AUTO_INCREMENT,
     dt_hora_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    tempo_registro_seg INT,
+    tempo_registro_ms INT,
     fk_usuario INT,
     CONSTRAINT fk_usuario_tempo_ociosidade FOREIGN KEY (fk_usuario) REFERENCES usuario(id_usuario)
 );
@@ -112,8 +106,9 @@ CREATE TABLE maquina (
     id_maquina INT PRIMARY KEY AUTO_INCREMENT,
     hostname VARCHAR(80),
     so VARCHAR(80),
-    cpu VARCHAR(80),
-    ram BIGINT,
+    cpu_modelo VARCHAR(80),
+    ram_total BIGINT,
+    ultima_mod DATETIME DEFAULT CURRENT_TIMESTAMP,  
     fk_empresa INT,
     CONSTRAINT fk_empresa_maquina FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
@@ -127,20 +122,12 @@ CREATE TABLE sessao (
     CONSTRAINT fk_usuario_sessao FOREIGN KEY (fk_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE log_alerta (
-    id_log_alerta INT PRIMARY KEY AUTO_INCREMENT,
-    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
-    tipo VARCHAR(45),
-    fk_sessao INT,
-    CONSTRAINT fk_sessao_alerta FOREIGN KEY (fk_sessao) REFERENCES sessao(id_sessao)
-);
-
 CREATE TABLE ocorrencia (
     id_ocorrencia INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(45),
     descricao VARCHAR(255),
     dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
-    prioridade VARCHAR(45),
+    tipo VARCHAR(45),
     fk_sessao INT,
     fk_atribuido INT,
     CONSTRAINT fk_sessao_ocorrencia FOREIGN KEY (fk_sessao) REFERENCES sessao(id_sessao),
@@ -162,13 +149,13 @@ CREATE TABLE volume (
     fk_maquina INT,
     nome VARCHAR(45),
     ponto_montagem VARCHAR(45),
+    volume_total BIGINT,
     CONSTRAINT fk_maquina_volume FOREIGN KEY (fk_maquina) REFERENCES maquina(id_maquina)
 );
 
 CREATE TABLE registro_volume (
     id_registro_volume INT PRIMARY KEY AUTO_INCREMENT,
     volume_disponivel BIGINT,
-    volume_total BIGINT,
     dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
     fk_volume CHAR(36) NOT NULL,
     CONSTRAINT fk_registro_volume FOREIGN KEY (fk_volume) REFERENCES volume(uuid)
@@ -216,7 +203,7 @@ INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_
 VALUES ('Alice', 'Silva', '11987654321', '1123456789', 'alice@techsolutions.com', '1980-05-15', '123.456.789-10', 'Diretor', 1000);
     
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
-VALUES ('Carlos', 'Santos', '11976543210', '1122334455', 'carlos@techsolutions.com', '1985-10-20', '987.654.321-01', 'gerente', 1000, 1);
+VALUES ('Carlos', 'Santos', '11976543210', '1122334455', 'carlos@techsolutions.com', '1985-10-20', '987.654.321-01', 'Gerente', 1000, 1);
     
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
 VALUES ('Lucas', 'Oliveira', '11965432109', '1199887766', 'lucas@techsolutions.com', '1990-07-12', '456.789.123-02', 'Operador', 1000, 2);
