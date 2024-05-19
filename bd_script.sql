@@ -13,7 +13,7 @@ CREATE TABLE endereco (
     cidade VARCHAR(45) NOT NULL,
     uf CHAR(2)
 );
-
+ 
 CREATE TABLE empresa (
     id_empresa INT PRIMARY KEY AUTO_INCREMENT,
     nome_fantasia VARCHAR(45) NOT NULL,
@@ -78,6 +78,7 @@ CREATE TABLE tarefa (
     descricao VARCHAR(255),
     dt_inicio DATE DEFAULT (CURRENT_DATE),
     dt_fim DATE,
+    prioridade VARCHAR(45),
     concluida TINYINT DEFAULT 0,
     dt_hora_concluida DATETIME,
     fk_funcionario INT NOT NULL,
