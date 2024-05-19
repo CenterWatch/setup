@@ -19,14 +19,15 @@ CREATE TABLE empresa (
     nome_fantasia VARCHAR(45) NOT NULL,
     razao_social VARCHAR(45) NOT NULL,
     cnpj CHAR(14) NOT NULL,
+    telefone VARCHAR(11),
     fk_matriz INT,
     CONSTRAINT fk_matriz_empresa FOREIGN KEY (fk_matriz) REFERENCES empresa(id_empresa),
     fk_endereco INT,
     CONSTRAINT fk_endereco_empresa FOREIGN KEY (fk_endereco) REFERENCES endereco(id_endereco)
 ) AUTO_INCREMENT = 1000;
 
-CREATE TABLE parametro_alerta (
-    id_parametro INT PRIMARY KEY,
+CREATE TABLE config (
+    id_config INT PRIMARY KEY,
     max_cpu DECIMAL(4, 1),
     max_ram DECIMAL(4, 1),
     max_volume DECIMAL(4, 1),
@@ -34,16 +35,25 @@ CREATE TABLE parametro_alerta (
     timer_mouse_ms INT,
     intervalo_registro_ms INT,
     intervalo_volume_ms INT,
-    CONSTRAINT fk_empresa_parametro FOREIGN KEY (id_parametro) REFERENCES empresa(id_empresa)
+    intervalo_quest_dias INT,
+    CONSTRAINT fk_empresa_config FOREIGN KEY (id_config) REFERENCES empresa(id_empresa)
+);
+
+CREATE TABLE perm_processo (
+    id_perm_processo INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    permitido TINYINT DEFAULT 0,
+    fk_config INT,
+    CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
 
 CREATE TABLE funcionario (
     id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
-    primeiro_nome VARCHAR(45),
-    sobrenome VARCHAR(45) NOT NULL,
+    primeiro_nome VARCHAR(80),
+    sobrenome VARCHAR(80) NOT NULL,
     celular CHAR(11),
-    telefone CHAR(11),
-    email VARCHAR(60) NOT NULL,
+    telefone VARCHAR(11),
+    email VARCHAR(80) NOT NULL,
     dt_nasc DATE,
     cpf CHAR(14) NOT NULL,
     cargo VARCHAR(45),
@@ -58,6 +68,7 @@ CREATE TABLE questionario (
     nota INT,
     detalhe VARCHAR(2000),
     dt_criacao DATE DEFAULT (CURRENT_DATE),
+    respondido_em DATETIME,
     fk_funcionario INT NOT NULL,
     CONSTRAINT fk_apontamento_funcionario FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
 );
@@ -65,10 +76,10 @@ CREATE TABLE questionario (
 CREATE TABLE tarefa (
     id_tarefa INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(255),
+    dt_inicio DATE DEFAULT (CURRENT_DATE),
     dt_fim DATE,
-    dt_inicio DATE,
     concluida TINYINT DEFAULT 0,
-    dt_hora_concluida DATETIME DEFAULT CURRENT_TIMESTAMP,
+    dt_hora_concluida DATETIME,
     fk_funcionario INT NOT NULL,
     fk_gerente INT NOT NULL,
     CONSTRAINT fk_funcionario_tarefa FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario),
@@ -93,13 +104,26 @@ CREATE TABLE tempo_ociosidade (
 
 CREATE TABLE artigo (
     id_artigo INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(25),
+    titulo VARCHAR(45),
     descricao VARCHAR(2000),
     categoria VARCHAR(45),
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
     palavra_chave VARCHAR(45),
-    dt_hora_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     fk_funcionario INT,
     CONSTRAINT fk_funcionario_artigo FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
+);
+
+CREATE TABLE tag (
+    id_tag INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45)
+);
+
+CREATE TABLE artigo_has_tag (
+    fk_tag INT,
+    fk_artigo INT,
+    CONSTRAINT fk_tag_at FOREIGN KEY (fk_tag) REFERENCES tag(id_tag),
+    CONSTRAINT fk_artigo_at FOREIGN KEY (fk_artigo) REFERENCES artigo(id_artigo),
+    PRIMARY KEY (fk_tag, fk_artigo)
 );
 
 CREATE TABLE maquina (
@@ -108,9 +132,18 @@ CREATE TABLE maquina (
     so VARCHAR(80),
     cpu_modelo VARCHAR(80),
     ram_total BIGINT,
-    ultima_mod DATETIME DEFAULT CURRENT_TIMESTAMP,  
+    modificado_em DATETIME DEFAULT CURRENT_TIMESTAMP,  
     fk_empresa INT,
     CONSTRAINT fk_empresa_maquina FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
+);
+
+CREATE TABLE volume (
+    uuid CHAR(36) PRIMARY KEY,
+    fk_maquina INT,
+    nome VARCHAR(45),
+    ponto_montagem VARCHAR(45),
+    volume_total BIGINT,
+    CONSTRAINT fk_maquina_volume FOREIGN KEY (fk_maquina) REFERENCES maquina(id_maquina)
 );
 
 CREATE TABLE sessao (
@@ -126,8 +159,10 @@ CREATE TABLE ocorrencia (
     id_ocorrencia INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(45),
     descricao VARCHAR(255),
-    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
     tipo VARCHAR(45),
+    resolvido TINYINT DEFAULT 0,
+    criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+    resolvido_em DATETIME,
     fk_sessao INT,
     fk_atribuido INT,
     CONSTRAINT fk_sessao_ocorrencia FOREIGN KEY (fk_sessao) REFERENCES sessao(id_sessao),
@@ -144,20 +179,13 @@ CREATE TABLE registro (
     CONSTRAINT fk_sessao_registro FOREIGN KEY (fk_sessao) REFERENCES sessao(id_sessao)
 );
 
-CREATE TABLE volume (
-    uuid CHAR(36) PRIMARY KEY,
-    fk_maquina INT,
-    nome VARCHAR(45),
-    ponto_montagem VARCHAR(45),
-    volume_total BIGINT,
-    CONSTRAINT fk_maquina_volume FOREIGN KEY (fk_maquina) REFERENCES maquina(id_maquina)
-);
-
 CREATE TABLE registro_volume (
     id_registro_volume INT PRIMARY KEY AUTO_INCREMENT,
     volume_disponivel BIGINT,
     dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fk_volume CHAR(36) NOT NULL,
+    fk_sessao INT,
+    fk_volume CHAR(36),
+    CONSTRAINT fk_registro_sessao FOREIGN KEY (fk_sessao) REFERENCES sessao(id_sessao),
     CONSTRAINT fk_registro_volume FOREIGN KEY (fk_volume) REFERENCES volume(uuid)
 );
 
@@ -168,6 +196,16 @@ CREATE TABLE processo (
     uso_ram BIGINT,
     fk_registro INT,
     CONSTRAINT fk_registro_processo FOREIGN KEY (fk_registro) REFERENCES registro(id_registro)
+);
+
+CREATE TABLE alerta (
+    id_alerta INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(45),
+    descricao VARCHAR(45),
+    fk_registro INT,
+    fk_reg_volume INT,
+    CONSTRAINT fk_registro_alerta FOREIGN KEY (fk_registro) REFERENCES registro(id_registro),
+    CONSTRAINT fk_reg_vol_alerta FOREIGN KEY (fk_reg_volume) REFERENCES registro_volume(id_registro_volume)
 );
 
 -- ENDEREÇOS
@@ -188,14 +226,14 @@ INSERT INTO empresa (nome_fantasia, razao_social, cnpj, fk_matriz, fk_endereco)
 VALUES ('Filial Centro', 'Centro Filial Ltda.', '11223344000188', 1000, 1);
 
 -- PARÂMETROS DE CONFIGURAÇÃO
-INSERT INTO parametro_alerta (id_parametro, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms)
-VALUES (1001, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000);
+INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
+VALUES (1001, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000, 10);
 
-INSERT INTO parametro_alerta (id_parametro, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms)
-VALUES (1000, 80.0, 70.0, 90.0, 20, 10000, 2000, 30000);
+INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
+VALUES (1000, 80.0, 70.0, 90.0, 20, 10000, 2000, 30000, 15);
 
-INSERT INTO parametro_alerta (id_parametro, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms)
-VALUES (1002, 75.0, 65.0, 85.0, 25, 25000, 2000, 35000);
+INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
+VALUES (1002, 75.0, 65.0, 85.0, 25, 25000, 2000, 35000, 10);
 
 -- FUNCIONÁRIOS
 -- Empresa 1
