@@ -42,7 +42,7 @@ CREATE TABLE config (
 CREATE TABLE perm_processo (
     id_perm_processo INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
-    permitido TINYINT DEFAULT 0,
+    permitido TINYINT,
     fk_config INT,
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
