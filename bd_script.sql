@@ -48,15 +48,23 @@ CREATE TABLE perm_processo (
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
 
+CREATE TABLE agendamento_quest (
+    id_quest INT PRIMARY KEY AUTO_INCREMENT,
+    inicio DATETIME,
+    fim DATETIME,
+    fk_config INT,
+    CONSTRAINT fk_config_ag_quest FOREIGN KEY (fk_config) REFERENCES config(id_config)
+);
+
 CREATE TABLE funcionario (
     id_funcionario INT PRIMARY KEY AUTO_INCREMENT,
     primeiro_nome VARCHAR(80),
     sobrenome VARCHAR(80) NOT NULL,
-    celular CHAR(11),
-    telefone VARCHAR(11),
+    celular CHAR(15),
+    telefone CHAR(14),
     email VARCHAR(80) NOT NULL,
     dt_nasc DATE,
-    cpf CHAR(11) NOT NULL,
+    cpf CHAR(14) NOT NULL,
     cargo VARCHAR(45),
     fk_gerente INT,
     fk_endereco INT,
@@ -67,7 +75,7 @@ CREATE TABLE funcionario (
 );
 
 CREATE TABLE questionario (
-    id_apontamento INT PRIMARY KEY AUTO_INCREMENT,
+    id_quest INT PRIMARY KEY AUTO_INCREMENT,
     nota INT,
     detalhe VARCHAR(2000),
     dt_criacao DATE DEFAULT (CURRENT_DATE),
