@@ -9,6 +9,7 @@ CREATE TABLE endereco (
     logradouro VARCHAR(45),
     cep CHAR(8),
     numero VARCHAR(5),
+    bairro VARCHAR(45),
     complemento VARCHAR(45),
     cidade VARCHAR(45) NOT NULL,
     uf CHAR(2)
@@ -55,11 +56,13 @@ CREATE TABLE funcionario (
     telefone VARCHAR(11),
     email VARCHAR(80) NOT NULL,
     dt_nasc DATE,
-    cpf CHAR(14) NOT NULL,
+    cpf CHAR(11) NOT NULL,
     cargo VARCHAR(45),
     fk_gerente INT,
+    fk_endereco INT,
     fk_empresa INT,
     CONSTRAINT fk_gerente_funcionario FOREIGN KEY (fk_gerente) REFERENCES funcionario(id_funcionario),
+    CONSTRAINT fk_endereco_funcionario FOREIGN KEY (fk_endereco) REFERENCES endereco(id_endereco),
     CONSTRAINT fk_empresa_funcionario FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
@@ -211,78 +214,126 @@ CREATE TABLE alerta (
 );
 
 -- ENDEREÇOS
-INSERT INTO endereco (logradouro, cep, numero, complemento, cidade, uf)
-VALUES ('Rua das Flores', '12345678', '101', 'Bloco A', 'São Paulo', 'SP');
-    
-INSERT INTO endereco (logradouro, cep, numero, complemento, cidade, uf)
-VALUES ('Avenida Copacabana', '87654321', '202', 'Sala 10', 'Rio de Janeiro', 'RJ');
-    
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua A', '07124403', '673', 'Jardim Diogo', 'N/A', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Guapeva', '03333010', 896, 'Vila Regente Feijó', 'Apto 28', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Loefgren 2527', '04040901', 752, 'Vila Clementino', 'Casa', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Via de Pedestre Tabularium', '02223350', 488, 'Jardim Brasil (Zona Norte)', 'Fundos', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Fernando de Albuquerque', '01309030', 303, 'Consolação', 'N/A', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Diomar Ackel', '03380080', 260, 'Chácara Belenzinho', 'Bloco A', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Osvaldo Nevola', '03946000', 295, 'Jardim Tietê', 'Casa', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Avenida Cardeal Motta 335', '05101909', 496, 'Vila Fiat Lux', 'Apto 198', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Primavera', '04176250', 765, 'Jardim Vergueiro (Sacomã)', 'N/A', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Pelágio Lobo', '05009020', 506, 'Perdizes', 'Apto 2', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Travessa Nardo do Monte', '03560180', 597, 'Vila Nhocune', 'Casa', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Evocação das Montanhas', '08381690', 807, 'Jardim Alto Alegre (São Rafael)', 'Fundos', 'São Paulo', 'SP');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES ('Rua Ilha das Palmas', '05164001', 327, 'Conjunto Habitacional Turística', 'Bloco B', 'São Paulo', 'SP');
+
+
 -- EMPRESAS
 INSERT INTO empresa (nome_fantasia, razao_social, cnpj, fk_endereco)
-VALUES ('Tech Solutions', 'Tech Solutions Ltda.', '12345678000100', 1);
-    
-INSERT INTO empresa (nome_fantasia, razao_social, cnpj, fk_endereco)
-VALUES ('Global Tech', 'Global Tech S.A.', '98765432000199', 2);
-
-INSERT INTO empresa (nome_fantasia, razao_social, cnpj, fk_matriz, fk_endereco)
-VALUES ('Filial Centro', 'Centro Filial Ltda.', '11223344000188', 1000, 1);
+VALUES ('Nexus', 'NEXUS ASSISTENCIA LTDA', '64845308000110', 1);
 
 -- PARÂMETROS DE CONFIGURAÇÃO
 INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
-VALUES (1001, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000, 10);
-
-INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
-VALUES (1000, 80.0, 70.0, 90.0, 20, 10000, 2000, 30000, 15);
-
-INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse, timer_mouse_ms, intervalo_registro_ms, intervalo_volume_ms, intervalo_quest_dias)
-VALUES (1002, 75.0, 65.0, 85.0, 25, 25000, 2000, 35000, 10);
-
+VALUES (1000, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000, 10);
+    
 -- FUNCIONÁRIOS
--- Empresa 1
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa)
-VALUES ('Alice', 'Silva', '11987654321', '1123456789', 'alice@techsolutions.com', '1980-05-15', '123.456.789-10', 'Diretor', 1000);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Manuel', 'Nicolas Cardoso', '14988654354', '1436325560', 'manuel.cardoso@nexus.com', '1982-04-02', '03867664870', 'Gerente', 1000, 2);
     
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
-VALUES ('Carlos', 'Santos', '11976543210', '1122334455', 'carlos@techsolutions.com', '1985-10-20', '987.654.321-01', 'Gerente', 1000, 1);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Valentina', 'Cláudia Assunção', '11987989241', '1129140034', 'valentina.assuncao@nexus.com', '1993-04-02', '06092551853', 'Operador', 1000, 1, 3);
     
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
-VALUES ('Lucas', 'Oliveira', '11965432109', '1199887766', 'lucas@techsolutions.com', '1990-07-12', '456.789.123-02', 'Operador', 1000, 2);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Isis', 'Valentina Farias', '11981608515', '35440749', 'isis.valentina@nexus.com', '1997-01-06', '93114418805', 'Operador', 1000, 1, 4);
     
--- Empresa 2
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa)
-VALUES ('Ana', 'Rodrigues', '21876543210', '2133445566', 'ana@globaltech.com', '1975-03-25', '789.456.123-45', 'Diretor', 1001);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ana', 'Vera Rezende', '11987470434', '1136764152', 'ana.rezende@nexus.com', '1991-01-15', '78892318810', 'Operador', 1000, 1, 5);
     
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
-VALUES ('Pedro', 'Ferreira', '21887654321', '2133556677', 'pedro@globaltech.com', '1992-12-08', '654.321.987-78', 'Suporte', 1001, 4);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ryan', 'Costa', '11989604140', '1125156928', 'ryan.costa@nexus.com', '1992-12-08', '14521675832', 'Operador', 1000, 1, 6);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Lívia', 'Luciana Figueiredo', '11986545684', '1129319945', 'livia.figueiredo@nexus.com', '1993-04-02', '40888624816', 'Gerente', 1000, 7);
     
--- Empresa 3
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa)
-VALUES ('Mariana', 'Souza', '11998765432', '1122667788', 'mariana@filialcentro.com', '1993-08-20', '987.654.321-98', 'Suporte', 1002);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Patrícia', 'Elisa Viana', '11992261086', '1139296287', 'patricia.viana@nexus.com', '1990-06-10', '54740320800', 'Operador', 1000, 2, 8);
     
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente)
-VALUES ('Rafael', 'Lima', '11987654321', '1122334455', 'rafael@filialcentro.com', '1995-04-18', '123.456.789-45', 'Operador', 1002, 6);
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Lara', 'Isadora Aparício', '11987376523', '1127816818', 'lara.aparicio@nexus.com', '1985-04-09', '58165225820', 'Operador', 1000, 2, 9);
+    
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Leandro', 'Monteiro Santos', '11988169528', '1135167017', 'ana.santos@nexus.com', '1975-03-25', '58033420847', 'Operador', 1000, 2, 10);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Benedito', 'Anthony de Paula', '11986843433', '1129141766', 'benedito.anthony@nexus.com', '1992-12-08', '43956670825', 'Operador', 1000, 2, 11);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Mariana', 'Souza', '11993684521', '1137066879', 'mariana.souza@nexus.com', '1993-08-20', '20029857821', 'Suporte', 1000, 12);
+    
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Catarina', 'Patrícia Fogaça', '11991407149', '1128207119', 'catarina.fogaca@nexus.com', '1993-08-20', '77348163807', 'Suporte', 1000, 13);
 
 -- USUÁRIOS
--- Empresa 1
-INSERT INTO usuario (id_usuario, username, senha)
-VALUES (1, 'alice@techsolutions.com', 'alice123');
-    
-INSERT INTO usuario (id_usuario, username, senha)
-VALUES (2, 'carlos@techsolutions.com', 'carlos456');
-    
-INSERT INTO usuario (id_usuario, username, senha)
-VALUES (3, 'lucas@techsolutions.com', 'lucas789');
 
--- Empresa 2
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (4, 'ana@globaltech.com', 'ana12987');
-    
-INSERT INTO usuario (id_usuario, username, senha)
-VALUES (5, 'pedro@globaltech.com', 'pedro654');
+VALUES (1, 'manuel.cardoso', 'man123123');
 
--- Empresa 3
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (6, 'mariana@filialcentro.com', 'mariana321');
-    
+VALUES (2, 'valentina.assuncao', 'val123123');
+
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (7, 'rafael@filialcentro.com', 'rafael123');
+VALUES (3, 'isis.valentina', 'isi123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (4, 'ana.rezende', 'ana123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (5, 'ryan.costa', 'rya123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (6, 'catarina.fogaca', 'cat123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (7, 'livia.figueiredo', 'liv123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (8, 'patricia.viana', 'pat123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (9, 'lara.aparicio', 'lar123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (10, 'ana.santos', 'ana123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (11, 'benedito.anthony', 'ben123123');
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES (12, 'mariana.souza', 'mar123123');
