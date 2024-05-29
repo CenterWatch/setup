@@ -98,6 +98,14 @@ CREATE TABLE tarefa (
     CONSTRAINT fk_gerente_tarefa FOREIGN KEY (fk_gerente) REFERENCES funcionario(id_funcionario)
 );  
 
+CREATE TABLE historico_tarefa (
+    id_historico_tarefa INT PRIMARY KEY AUTO_INCREMENT,
+    status VARCHAR(45),
+    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fk_tarefa INT,
+    CONSTRAINT fk_historico_tarefa FOREIGN KEY (fk_tarefa) REFERENCES tarefa(id_tarefa)
+);
+
 CREATE TABLE usuario (
     id_usuario INT PRIMARY KEY,
     username VARCHAR(80),
@@ -141,6 +149,7 @@ CREATE TABLE artigo_has_tag (
 CREATE TABLE maquina (
     id_maquina INT PRIMARY KEY AUTO_INCREMENT,
     hostname VARCHAR(80),
+    ip VARCHAR(15),
     so VARCHAR(80),
     cpu_modelo VARCHAR(80),
     ram_total BIGINT,
@@ -345,3 +354,30 @@ VALUES (11, 'benedito.anthony', 'ben123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
 VALUES (12, 'mariana.souza', 'mar123123');
+
+INSERT INTO tarefa (descricao, dt_inicio, dt_fim, prioridade, concluida, dt_hora_concluida, fk_funcionario, fk_gerente)
+VALUES 
+('Responder consultas de clientes', '2024-05-01', '2024-05-10', 'media', false, NULL, 2, 1),
+('Resolver problemas técnicos dos clientes', '2024-05-03', '2024-05-15', 'media', false, NULL, 3, 1),
+('Realizar follow-up de chamadas pendentes', '2024-05-05', '2024-05-08', 'media', true, '2024-05-08 12:00:00', 4, 1),
+('Atualizar registros de clientes', '2024-05-06', '2024-05-12', 'media', false, NULL, 5, 1),
+('Treinamento de novos operadores', '2024-05-07', '2024-05-11', 'media', true, '2024-05-11 15:30:00', 2, 1),
+('Reunião com a equipe de supervisão', '2024-05-09', '2024-05-09', 'media', false, NULL, 3, 1),
+('Planejamento de escalas de trabalho', '2024-05-10', '2024-05-12', 'media', false, NULL, 4, 1),
+('Analisar métricas de desempenho de chamadas', '2024-05-11', '2024-05-13', 'media', false, NULL, 5, 1),
+('Revisar gravações de chamadas', '2024-05-12', '2024-05-14', 'media', true, '2024-05-14 09:00:00', 2, 1),
+('Coaching de operadores de call center', '2024-05-13', '2024-05-15', 'media', false, NULL, 3, 1);
+
+INSERT INTO historico_tarefa (status, dt_hora, fk_tarefa)
+VALUES 
+('CONCLUIDO', '2024-05-08 12:00:00', 3),
+('CONCLUIDO', '2024-05-11 15:30:00', 5),
+('CONCLUIDO', '2024-05-14 09:00:00', 9),
+('ATRASO', '2024-05-16 10:00:00', 1),
+('ATRASO', '2024-05-16 10:00:00', 2),
+('ATRASO', '2024-05-16 10:00:00', 4),
+('ATRASO', '2024-05-16 10:00:00', 6),
+('ATRASO', '2024-05-16 10:00:00', 7),
+('ATRASO', '2024-05-16 10:00:00', 8),
+('ATRASO', '2024-05-16 10:00:00', 10);
+
