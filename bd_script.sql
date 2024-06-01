@@ -335,25 +335,25 @@ INSERT INTO usuario (id_usuario, username, senha)
 VALUES (5, 'ryan.costa', 'rya123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (6, 'catarina.fogaca', 'cat123123');
+VALUES (6, 'livia.figueiredo', 'liv123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (7, 'livia.figueiredo', 'liv123123');
+VALUES (7, 'patricia.viana', 'pat123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (8, 'patricia.viana', 'pat123123');
+VALUES (8, 'lara.aparicio', 'lar123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (9, 'lara.aparicio', 'lar123123');
+VALUES (9, 'ana.santos', 'ana123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (10, 'ana.santos', 'ana123123');
+VALUES (10, 'benedito.anthony', 'ben123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (11, 'benedito.anthony', 'ben123123');
+VALUES (11, 'mariana.souza', 'mar123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
-VALUES (12, 'mariana.souza', 'mar123123');
+VALUES (12, 'catarina.fogaca', 'cat123123');
 
 INSERT INTO tarefa (descricao, dt_inicio, dt_fim, prioridade, concluida, dt_hora_concluida, fk_funcionario, fk_gerente)
 VALUES 
