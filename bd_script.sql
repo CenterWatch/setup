@@ -78,10 +78,11 @@ CREATE TABLE questionario (
     id_quest INT PRIMARY KEY AUTO_INCREMENT,
     nota INT,
     detalhe VARCHAR(2000),
-    dt_criacao DATE DEFAULT (CURRENT_DATE),
-    respondido_em DATETIME,
+    respondido_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fk_quest INT NOT NULL,
+    CONSTRAINT fk_quest_agendamento_quest FOREIGN KEY (fk_quest) REFERENCES agendamento_quest(id_quest),
     fk_funcionario INT NOT NULL,
-    CONSTRAINT fk_apontamento_funcionario FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
+    CONSTRAINT fk_quest_funcionario FOREIGN KEY (fk_funcionario) REFERENCES funcionario(id_funcionario)
 );
 
 CREATE TABLE tarefa (
