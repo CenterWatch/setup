@@ -171,6 +171,7 @@ CREATE TABLE sessao (
     id_sessao INT PRIMARY KEY AUTO_INCREMENT,
     fk_maquina INT,
     fk_usuario INT,
+    fim_sessao DATETIME,
     dt_hora_sessao DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_maquina_sessao FOREIGN KEY (fk_maquina) REFERENCES maquina(id_maquina),
     CONSTRAINT fk_usuario_sessao FOREIGN KEY (fk_usuario) REFERENCES usuario(id_usuario)
