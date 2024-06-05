@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Vai ser um setup diferente para cada integrante do grupo?
-echo "Desinstalando possíveis dependências e aplicações que possam causar conflito"
+# echo "Desinstalando possíveis dependências e aplicações que possam causar conflito"
 # sudo for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
 # Adicionando chave GPG oficial Docker 

@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: centerwatch/bd_local_jar:1.0
+    container_name: container_sql_local
+    restart: always
+    ports:
+      - "3307:3306"
+
+  jar:
+    image: centerwatch/cwatching_jar:1.0
+    container_name: jar_local
+    restart: always
+    depends_on:
+      - mysql
