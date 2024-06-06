@@ -25,6 +25,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 # Instalar arquivo docker-compose.yml
 
-wget -O docker-compose.yml https://raw.githubusercontent.com/Lucas-Oristanio/jar_client/main/docker-compose.yml
+wget -O docker-compose.yml https://raw.githubusercontent.com/CenterWatch/setup/Setup-Jean/docker-compose.yml
 
 sudo docker compose up

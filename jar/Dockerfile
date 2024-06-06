@@ -1,5 +1,5 @@
 FROM openjdk:17
 WORKDIR /cwathing
 RUN mkdir -p ./logs
-COPY cwathing-monitoring.jar /cwathing/
+COPY cwatching-monitoring.jar /cwathing/
 CMD ["java","-jar","cwatching-monitoring.jar","false", "0"]
