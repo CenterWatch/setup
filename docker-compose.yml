@@ -7,8 +7,9 @@ services:
       - "3307:3306"
 
   jar:
-    image: eduardaguardiao/jar:1.0
+    image: vinilope/jar:1.0
     container_name: jar_local
     restart: always
+    hostname: VINILOPE2
     depends_on:
       - mysql
