@@ -44,6 +44,8 @@ CREATE TABLE perm_processo (
     id_perm_processo INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     permitido TINYINT,
+    path VARCHAR(250),
+    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
     fk_config INT,
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
@@ -282,42 +284,41 @@ INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse
 VALUES (1000, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000, 10);
     
 -- FUNCIONÁRIOS
-
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Manuel', 'Nicolas Cardoso', '14988654354', '1436325560', 'manuel.cardoso@nexus.com', '1982-04-02', '03867664870', 'Gerente', 1000, 2);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Valentina', 'Cláudia Assunção', '11987989241', '1129140034', 'valentina.assuncao@nexus.com', '1993-04-02', '06092551853', 'Operador', 1000, 1, 3);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Isis', 'Valentina Farias', '11981608515', '35440749', 'isis.valentina@nexus.com', '1997-01-06', '93114418805', 'Operador', 1000, 1, 4);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Ana', 'Vera Rezende', '11987470434', '1136764152', 'ana.rezende@nexus.com', '1991-01-15', '78892318810', 'Operador', 1000, 1, 5);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Ryan', 'Costa', '11989604140', '1125156928', 'ryan.costa@nexus.com', '1992-12-08', '14521675832', 'Operador', 1000, 1, 6);
-
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Lívia', 'Luciana Figueiredo', '11986545684', '1129319945', 'livia.figueiredo@nexus.com', '1993-04-02', '40888624816', 'Gerente', 1000, 7);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Patrícia', 'Elisa Viana', '11992261086', '1139296287', 'patricia.viana@nexus.com', '1990-06-10', '54740320800', 'Operador', 1000, 2, 8);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Lara', 'Isadora Aparício', '11987376523', '1127816818', 'lara.aparicio@nexus.com', '1985-04-09', '58165225820', 'Operador', 1000, 2, 9);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Leandro', 'Monteiro Santos', '11988169528', '1135167017', 'ana.santos@nexus.com', '1975-03-25', '58033420847', 'Operador', 1000, 2, 10);
+VALUES ('Manuel', 'Nicolas Cardoso', '(14) 98865-4354', '(14) 3632-5560', 'manuel.cardoso@nexus.com', '1982-04-02', '038.676.648-70', 'Gerente', 1000, 2);
 
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Benedito', 'Anthony de Paula', '11986843433', '1129141766', 'benedito.anthony@nexus.com', '1992-12-08', '43956670825', 'Operador', 1000, 2, 11);
+VALUES ('Valentina', 'Cláudia Assunção', '(11) 98798-9241', '(11) 2914-0034', 'valentina.assuncao@nexus.com', '1993-04-02', '060.925.518-53', 'Operador', 1000, 1, 3);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Isis', 'Valentina Farias', '(11) 98160-8515', '(35) 4407-49', 'isis.valentina@nexus.com', '1997-01-06', '931.144.188-05', 'Operador', 1000, 1, 4);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ana', 'Vera Rezende', '(11) 98747-0434', '(11) 3676-4152', 'ana.rezende@nexus.com', '1991-01-15', '788.923.188-10', 'Operador', 1000, 1, 5);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ryan', 'Costa', '(11) 98960-4140', '(11) 2515-6928', 'ryan.costa@nexus.com', '1992-12-08', '145.216.758-32', 'Operador', 1000, 1, 6);
 
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Mariana', 'Souza', '11993684521', '1137066879', 'mariana.souza@nexus.com', '1993-08-20', '20029857821', 'Suporte', 1000, 12);
-    
+VALUES ('Lívia', 'Luciana Figueiredo', '(11) 98654-5684', '(11) 2931-9945', 'livia.figueiredo@nexus.com', '1993-04-02', '408.886.248-16', 'Gerente', 1000, 7);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Patrícia', 'Elisa Viana', '(11) 99226-1086', '(11) 3929-6287', 'patricia.viana@nexus.com', '1990-06-10', '547.403.208-00', 'Operador', 1000, 2, 8);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Lara', 'Isadora Aparício', '(11) 98737-6523', '(11) 2781-6818', 'lara.aparicio@nexus.com', '1985-04-09', '581.652.258-20', 'Operador', 1000, 2, 9);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Leandro', 'Monteiro Santos', '(11) 98816-9528', '(11) 3516-7017', 'ana.santos@nexus.com', '1975-03-25', '580.334.208-47', 'Operador', 1000, 2, 10);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Benedito', 'Anthony de Paula', '(11) 98684-3433', '(11) 2914-1766', 'benedito.anthony@nexus.com', '1992-12-08', '439.566.708-25', 'Operador', 1000, 2, 11);
+
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Catarina', 'Patrícia Fogaça', '11991407149', '1128207119', 'catarina.fogaca@nexus.com', '1993-08-20', '77348163807', 'Suporte', 1000, 13);
+VALUES ('Mariana', 'Souza', '(11) 93684-521', '(11) 3706-6879', 'mariana.souza@nexus.com', '1993-08-20', '200.298.578-21', 'Suporte', 1000, 12);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Catarina', 'Patrícia Fogaça', '(11) 91407-149', '(11) 2820-7119', 'catarina.fogaca@nexus.com', '1993-08-20', '773.481.638-07', 'Suporte', 1000, 13);
 
 -- USUÁRIOS
 
@@ -357,119 +358,29 @@ VALUES (11, 'mariana.souza', 'mar123123');
 INSERT INTO usuario (id_usuario, username, senha)
 VALUES (12, 'catarina.fogaca', 'cat123123');
 
-INSERT INTO tarefa (descricao, dt_inicio, dt_fim, prioridade, concluida, dt_hora_concluida, fk_funcionario, fk_gerente)
-VALUES 
-('Responder consultas de clientes', '2024-05-01', '2024-05-10', 'media', false, NULL, 2, 1),
-('Resolver problemas técnicos dos clientes', '2024-05-03', '2024-05-15', 'media', false, NULL, 3, 1),
-('Realizar follow-up de chamadas pendentes', '2024-05-05', '2024-05-08', 'media', true, '2024-05-08 12:00:00', 4, 1),
-('Atualizar registros de clientes', '2024-05-06', '2024-05-12', 'media', false, NULL, 5, 1),
-('Treinamento de novos operadores', '2024-05-07', '2024-05-11', 'media', true, '2024-05-11 15:30:00', 2, 1),
-('Reunião com a equipe de supervisão', '2024-05-09', '2024-05-09', 'media', false, NULL, 3, 1),
-('Planejamento de escalas de trabalho', '2024-05-10', '2024-05-12', 'media', false, NULL, 4, 1),
-('Analisar métricas de desempenho de chamadas', '2024-05-11', '2024-05-13', 'media', false, NULL, 5, 1),
-('Revisar gravações de chamadas', '2024-05-12', '2024-05-14', 'media', true, '2024-05-14 09:00:00', 2, 1),
-('Coaching de operadores de call center', '2024-05-13', '2024-05-15', 'media', false, NULL, 3, 1);
-
-INSERT INTO historico_tarefa (status, dt_hora, fk_tarefa)
-VALUES 
-('CONCLUIDO', '2024-05-08 12:00:00', 3),
-('CONCLUIDO', '2024-05-11 15:30:00', 5),
-('CONCLUIDO', '2024-05-14 09:00:00', 9),
-('ATRASO', '2024-05-16 10:00:00', 1),
-('ATRASO', '2024-05-16 10:00:00', 2),
-('ATRASO', '2024-05-16 10:00:00', 4),
-('ATRASO', '2024-05-16 10:00:00', 6),
-('ATRASO', '2024-05-16 10:00:00', 7),
-('ATRASO', '2024-05-16 10:00:00', 8),
-('ATRASO', '2024-05-16 10:00:00', 10);
-
-
-INSERT INTO perm_processo (nome, fk_config)
+INSERT INTO endereco (id_endereco, logradouro, cep, numero, bairro, complemento, cidade, uf)
 VALUES
-('azuredatastudio', 1000),
-('smss', 1000),
-('java', 1000),
-('gamingservices', 1000),
-('gamingservicesnet', 1000),
-('Code', 1000),
-('taskhostw', 1000),
-('winlogon', 1000),
-('OfficeClickToRun', 1000),
-('dwm', 1000),
-('StartMenuExperienceHost', 1000),
-('csrss', 1000),
-('audiodg', 1000),
-('SqlToolsResourceProviderService', 1000),
-('MpDefenderCoreService', 1000),
-('svchost', 1000),
-('AMDRSServ', 1000),
-('mstsc', 1000),
-('services', 1000),
-('FileCoAuth', 1000),
-('WidgetService', 1000),
-('SecurityHealthService', 1000),
-('TextInputHost', 1000),
-('ShellExperienceHost', 1000),
-('conhost', 1000),
-('wininit', 1000),
-('RtkAudUService64', 1000),
-('vmcompute', 1000),
-('steamwebhelper', 1000),
-('LsaIso', 1000),
-('WmiPrvSE', 1000),
-('sihost', 1000),
-('System', 1000),
-('SystemSettingsBroker', 1000),
-('dllhost', 1000),
-('ApplicationFrameHost', 1000),
-('mysqld', 1000),
-('Registry', 1000),
-('bash', 1000),
-('Memory Compression', 1000),
-('fsnotifier', 1000),
-('CPUMetricsServer', 1000),
-('powershell', 1000),
-('steamservice', 1000),
-('RuntimeBroker', 1000),
-('idea64', 1000),
-('atiesrxx', 1000),
-('explorer', 1000),
-('cmd', 1000),
-('MicrosoftSqlToolsServiceLayer', 1000),
-('WindowsTerminal', 1000),
-('cncmd', 1000),
-('ngrok', 1000),
-('git-bash', 1000),
-('DataExchangeHost', 1000),
-('OneDrive', 1000),
-('ctfmon', 1000),
-('Notepad', 1000),
-('spoolsv', 1000),
-('UserOOBEBroker', 1000),
-('MicrosoftSqlToolsCredentials', 1000),
-('SecurityHealthSystray', 1000),
-('MySQLWorkbench', 1000),
-('wslservice', 1000),
-('firefox', 1000),
-('Widgets', 1000),
-('PhoneExperienceHost', 1000),
-('mintty', 1000),
-('fontdrvhost', 1000),
-('dasHost', 1000),
-('atieclxx', 1000),
-('RadeonSoftware', 1000),
-('lsass', 1000),
-('LockApp', 1000),
-('wlanext', 1000),
-('NisSrv', 1000),
-('Secure System', 1000),
-('Idle', 1000),
-('steam', 1000),
-('spacedeskService', 1000),
-('spacedeskServiceTray', 1000),
-('SearchHost', 1000),
-('AMDRSSrcExt', 1000),
-('OpenConsole', 1000),
-('MsMpEng', 1000),
-('amdfendrsr', 1000),
-('SearchIndexer', 1000);
+(34, 'Rua Funchal', '04551060', '1329', 'Vila Olímpia', '', 'São Paulo', 'SP'),
+(33, 'Avenida das Ameixeiras', '09940400', '123', 'Taboão', '(Jd Maravilha)', 'Diadema', 'SP'),
+(32, 'Rua Olinda', '09770070', '99', 'Nova Petrópolis', '', 'São Bernardo do Campo', 'SP'),
+(28, 'Rua F', '02859190', '49', 'Jardim Vitória Régia (Zona Norte)', '', 'São Paulo', 'SP'),
+(27, 'Rua Cupiara', '03273020', '123', 'Vila Santa Clara', '', 'São Paulo', 'SP'),
+(29, 'Praça da Sé', '01001000', '432', 'Sé', '', 'São Paulo', 'SP');
+
+INSERT INTO funcionario (id_funcionario, primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_gerente, fk_endereco, fk_empresa)
+VALUES
+(19, 'Eduarda', 'Guardião', '(11) 95128-8322', '', 'maria.guardiao@sptech.school', '2005-03-29', '356.455.545-65', 'Operador', 1, 34, 1000),
+(20, 'Vinícius', 'Zirondi', '(19) 99965-4584', '(19) 3534-1719', 'viniciuszirondi04@gmail.com', '2004-08-31', '123.123.123-12', 'Operador', 1, 33, 1000),
+(21, 'Jean', 'Rocha Santos', '(11) 11635-8593', '(11) 8699-4859', 'jean@hotmail.com', '2000-03-10', '247.437.575-48', 'Operador', 1, 32, 1000),
+(22, 'Samuel', 'de Oliveira', '(11) 93410-1869', '(11) 1234-1223', 'samuel@gmail.com', '2004-02-08', '534.733.998-50', 'Operador', 1, 28, 1000),
+(23, 'Lucas', 'Faes', '(11) 91234-1234', '(11) 1234-1234', 'lucas.faes@techsolutions.com', '2004-10-20', '123.123.123-12', 'Operador', 1, 27, 1000),
+(24, 'Pedro', 'Scortuzzi', '(11) 91234-1234', '(11) 1234-1234', 'pedro.scortuzzi@techsolutions.com', '2005-03-30', '123.123.123-12', 'Operador', 1, 29, 1000);
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES
+(19, 'maria.guardiao', 'mar123123'),
+(20, 'vinicius.zirondi', 'vin123123'),
+(21, 'jean.santos', 'jea123123'),
+(22, 'samuel.batista', 'sam123123'),
+(23, 'lucas.faes', 'luc123123'),
+(24, 'pedro.scortuzzi', 'sco123123');
