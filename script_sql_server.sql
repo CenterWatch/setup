@@ -1,5 +1,3 @@
-
-
 CREATE TABLE endereco (
     id_endereco INT IDENTITY(1,1) PRIMARY KEY,
     logradouro NVARCHAR(45),
@@ -40,6 +38,8 @@ CREATE TABLE perm_processo (
     id_perm_processo INT IDENTITY(1,1) PRIMARY KEY,
     nome NVARCHAR(45) NOT NULL,
     permitido BIT,
+    path VARCHAR(250),
+    dt_hora DATETIME DEFAULT GETDATE(),
     fk_config INT,
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );

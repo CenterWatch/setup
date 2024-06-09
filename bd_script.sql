@@ -44,6 +44,8 @@ CREATE TABLE perm_processo (
     id_perm_processo INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     permitido TINYINT,
+    path VARCHAR(250),
+    dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
     fk_config INT,
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
