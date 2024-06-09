@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: centerwatch/bd_local_jar:1.0
+    image: vinilope/cwdb:1.5
     container_name: container_sql_local
     restart: always
     ports:
@@ -10,6 +10,9 @@ services:
     image: vinilope/jar:1.0
     container_name: jar_local
     restart: always
-    hostname: VINILOPE2
+    hostname: DESKTOP_001
     depends_on:
       - mysql
+
+volumes:
+  mysql_data: 
