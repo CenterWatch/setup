@@ -9,6 +9,7 @@ services:
   jar:
     image: eduardaguardiao/jar:1.0
     container_name: jar_local
+    hostname: desktop_002
     restart: always
     depends_on:
       - mysql
