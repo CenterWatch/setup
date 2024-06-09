@@ -42,8 +42,10 @@ if [ $? -ne 0 ]; then
     echo "Iniciando o Docker daemon"
     sudo systemctl start docker
     sudo systemctl enable docker
+else
+    echo "Docker daemon está em execução"
 fi
 
 # Sobe os containers, executa sempre que executar o script
-echo "Iniciando containers"
+echo "Iniciando containers..."
 sudo docker compose up
