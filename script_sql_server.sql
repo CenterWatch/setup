@@ -1,5 +1,3 @@
-
-
 CREATE TABLE endereco (
     id_endereco INT IDENTITY(1,1) PRIMARY KEY,
     logradouro NVARCHAR(45),
@@ -40,6 +38,8 @@ CREATE TABLE perm_processo (
     id_perm_processo INT IDENTITY(1,1) PRIMARY KEY,
     nome NVARCHAR(45) NOT NULL,
     permitido BIT,
+    path NVARCHAR(250),
+    dt_hora DATETIME DEFAULT GETDATE(),
     fk_config INT,
     CONSTRAINT fk_config_perm FOREIGN KEY (fk_config) REFERENCES config(id_config)
 );
@@ -352,6 +352,33 @@ VALUES (11, 'mariana.souza', 'mar123123');
 
 INSERT INTO usuario (id_usuario, username, senha)
 VALUES (12, 'catarina.fogaca', 'cat123123');
+
+INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
+VALUES
+('Rua Funchal', '04551060', '1329', 'Vila Olímpia', '', 'São Paulo', 'SP'),
+('Avenida das Ameixeiras', '09940400', '123', 'Taboão', '(Jd Maravilha)', 'Diadema', 'SP'),
+('Rua Olinda', '09770070', '99', 'Nova Petrópolis', '', 'São Bernardo do Campo', 'SP'),
+('Rua F', '02859190', '49', 'Jardim Vitória Régia (Zona Norte)', '', 'São Paulo', 'SP'),
+('Rua Cupiara', '03273020', '123', 'Vila Santa Clara', '', 'São Paulo', 'SP'),
+('Praça da Sé', '01001000', '432', 'Sé', '', 'São Paulo', 'SP');
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_gerente, fk_endereco, fk_empresa)
+VALUES
+('Eduarda', 'Guardião', '(11) 95128-8322', '', 'maria.guardiao@sptech.school', '2005-03-29', '356.455.545-65', 'Operador', 1, 14, 1000),
+('Vinícius', 'Zirondi', '(19) 99965-4584', '(19) 3534-1719', 'viniciuszirondi04@gmail.com', '2004-08-31', '123.123.123-12', 'Operador', 1, 15, 1000),
+('Jean', 'Rocha Santos', '(11) 11635-8593', '(11) 8699-4859', 'jean@hotmail.com', '2000-03-10', '247.437.575-48', 'Operador', 1, 16, 1000),
+('Samuel', 'de Oliveira', '(11) 93410-1869', '(11) 1234-1223', 'samuel@gmail.com', '2004-02-08', '534.733.998-50', 'Operador', 1, 17, 1000),
+('Lucas', 'Faes', '(11) 91234-1234', '(11) 1234-1234', 'lucas.faes@techsolutions.com', '2004-10-20', '123.123.123-12', 'Operador', 1, 18, 1000),
+('Pedro', 'Scortuzzi', '(11) 91234-1234', '(11) 1234-1234', 'pedro.scortuzzi@techsolutions.com', '2005-03-30', '123.123.123-12', 'Operador', 1, 19, 1000);
+
+INSERT INTO usuario (id_usuario, username, senha)
+VALUES
+(13, 'maria.guardiao', 'mar123123'),
+(14, 'vinicius.zirondi', 'vin123123'),
+(15, 'jean.santos', 'jea123123'),
+(16, 'samuel.batista', 'sam123123'),
+(17, 'lucas.faes', 'luc123123'),
+(18, 'pedro.scortuzzi', 'sco123123');
 
 INSERT INTO tarefa (descricao, dt_inicio, dt_fim, prioridade, concluida, dt_hora_concluida, fk_funcionario, fk_gerente)
 VALUES 
