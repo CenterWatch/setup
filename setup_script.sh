@@ -36,6 +36,14 @@ else
     wget -O docker-compose.yml https://raw.githubusercontent.com/CenterWatch/setup/Setup-Lucas/docker-compose.yml
 fi
 
+# Verificar se o docker daemon está em execução
+sudo systemctl is-active --quiet docker
+if [ $? -ne 0 ]; then
+    echo "Iniciando o Docker daemon"
+    sudo systemctl start docker
+    sudo systemctl enable docker
+fi
+
 # Sobe os containers, executa sempre que executar o script
 echo "Iniciando containers"
 sudo docker compose up
