@@ -9,6 +9,7 @@ services:
   jar:
     image: centerwatch/cwatching_jar:1.0
     container_name: jar_local
+    hostname: desktop_003
     restart: always
     depends_on:
       - mysql
