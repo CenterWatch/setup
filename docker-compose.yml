@@ -9,7 +9,7 @@ services:
   jar:
     image: vinilope/jar:1.0
     container_name: jar_local
+    hostname: desktop_005
     restart: always
-    hostname: VINILOPE2
     depends_on:
       - mysql
