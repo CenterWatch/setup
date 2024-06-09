@@ -284,42 +284,41 @@ INSERT INTO config (id_config, max_cpu, max_ram, max_volume, sensibilidade_mouse
 VALUES (1000, 85.0, 80.0, 95.0, 25, 15000, 3000, 40000, 10);
     
 -- FUNCIONÁRIOS
-
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Manuel', 'Nicolas Cardoso', '14988654354', '1436325560', 'manuel.cardoso@nexus.com', '1982-04-02', '03867664870', 'Gerente', 1000, 2);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Valentina', 'Cláudia Assunção', '11987989241', '1129140034', 'valentina.assuncao@nexus.com', '1993-04-02', '06092551853', 'Operador', 1000, 1, 3);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Isis', 'Valentina Farias', '11981608515', '35440749', 'isis.valentina@nexus.com', '1997-01-06', '93114418805', 'Operador', 1000, 1, 4);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Ana', 'Vera Rezende', '11987470434', '1136764152', 'ana.rezende@nexus.com', '1991-01-15', '78892318810', 'Operador', 1000, 1, 5);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Ryan', 'Costa', '11989604140', '1125156928', 'ryan.costa@nexus.com', '1992-12-08', '14521675832', 'Operador', 1000, 1, 6);
-
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Lívia', 'Luciana Figueiredo', '11986545684', '1129319945', 'livia.figueiredo@nexus.com', '1993-04-02', '40888624816', 'Gerente', 1000, 7);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Patrícia', 'Elisa Viana', '11992261086', '1139296287', 'patricia.viana@nexus.com', '1990-06-10', '54740320800', 'Operador', 1000, 2, 8);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Lara', 'Isadora Aparício', '11987376523', '1127816818', 'lara.aparicio@nexus.com', '1985-04-09', '58165225820', 'Operador', 1000, 2, 9);
-    
-INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Leandro', 'Monteiro Santos', '11988169528', '1135167017', 'ana.santos@nexus.com', '1975-03-25', '58033420847', 'Operador', 1000, 2, 10);
+VALUES ('Manuel', 'Nicolas Cardoso', '(14) 98865-4354', '(14) 3632-5560', 'manuel.cardoso@nexus.com', '1982-04-02', '038.676.648-70', 'Gerente', 1000, 2);
 
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
-VALUES ('Benedito', 'Anthony de Paula', '11986843433', '1129141766', 'benedito.anthony@nexus.com', '1992-12-08', '43956670825', 'Operador', 1000, 2, 11);
+VALUES ('Valentina', 'Cláudia Assunção', '(11) 98798-9241', '(11) 2914-0034', 'valentina.assuncao@nexus.com', '1993-04-02', '060.925.518-53', 'Operador', 1000, 1, 3);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Isis', 'Valentina Farias', '(11) 98160-8515', '(35) 4407-49', 'isis.valentina@nexus.com', '1997-01-06', '931.144.188-05', 'Operador', 1000, 1, 4);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ana', 'Vera Rezende', '(11) 98747-0434', '(11) 3676-4152', 'ana.rezende@nexus.com', '1991-01-15', '788.923.188-10', 'Operador', 1000, 1, 5);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Ryan', 'Costa', '(11) 98960-4140', '(11) 2515-6928', 'ryan.costa@nexus.com', '1992-12-08', '145.216.758-32', 'Operador', 1000, 1, 6);
 
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Mariana', 'Souza', '11993684521', '1137066879', 'mariana.souza@nexus.com', '1993-08-20', '20029857821', 'Suporte', 1000, 12);
-    
+VALUES ('Lívia', 'Luciana Figueiredo', '(11) 98654-5684', '(11) 2931-9945', 'livia.figueiredo@nexus.com', '1993-04-02', '408.886.248-16', 'Gerente', 1000, 7);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Patrícia', 'Elisa Viana', '(11) 99226-1086', '(11) 3929-6287', 'patricia.viana@nexus.com', '1990-06-10', '547.403.208-00', 'Operador', 1000, 2, 8);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Lara', 'Isadora Aparício', '(11) 98737-6523', '(11) 2781-6818', 'lara.aparicio@nexus.com', '1985-04-09', '581.652.258-20', 'Operador', 1000, 2, 9);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Leandro', 'Monteiro Santos', '(11) 98816-9528', '(11) 3516-7017', 'ana.santos@nexus.com', '1975-03-25', '580.334.208-47', 'Operador', 1000, 2, 10);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_gerente, fk_endereco)
+VALUES ('Benedito', 'Anthony de Paula', '(11) 98684-3433', '(11) 2914-1766', 'benedito.anthony@nexus.com', '1992-12-08', '439.566.708-25', 'Operador', 1000, 2, 11);
+
 INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
-VALUES ('Catarina', 'Patrícia Fogaça', '11991407149', '1128207119', 'catarina.fogaca@nexus.com', '1993-08-20', '77348163807', 'Suporte', 1000, 13);
+VALUES ('Mariana', 'Souza', '(11) 93684-521', '(11) 3706-6879', 'mariana.souza@nexus.com', '1993-08-20', '200.298.578-21', 'Suporte', 1000, 12);
+
+INSERT INTO funcionario (primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_empresa, fk_endereco)
+VALUES ('Catarina', 'Patrícia Fogaça', '(11) 91407-149', '(11) 2820-7119', 'catarina.fogaca@nexus.com', '1993-08-20', '773.481.638-07', 'Suporte', 1000, 13);
 
 -- USUÁRIOS
 
@@ -365,7 +364,8 @@ VALUES
 (33, 'Avenida das Ameixeiras', '09940400', '123', 'Taboão', '(Jd Maravilha)', 'Diadema', 'SP'),
 (32, 'Rua Olinda', '09770070', '99', 'Nova Petrópolis', '', 'São Bernardo do Campo', 'SP'),
 (28, 'Rua F', '02859190', '49', 'Jardim Vitória Régia (Zona Norte)', '', 'São Paulo', 'SP'),
-(27, 'Rua Cupiara', '03273020', '123', 'Vila Santa Clara', '', 'São Paulo', 'SP');
+(27, 'Rua Cupiara', '03273020', '123', 'Vila Santa Clara', '', 'São Paulo', 'SP'),
+(29, 'Praça da Sé', '01001000', '432', 'Sé', '', 'São Paulo', 'SP');
 
 INSERT INTO funcionario (id_funcionario, primeiro_nome, sobrenome, celular, telefone, email, dt_nasc, cpf, cargo, fk_gerente, fk_endereco, fk_empresa)
 VALUES
@@ -373,12 +373,14 @@ VALUES
 (20, 'Vinícius', 'Zirondi', '(19) 99965-4584', '(19) 3534-1719', 'viniciuszirondi04@gmail.com', '2004-08-31', '123.123.123-12', 'Operador', 1, 33, 1000),
 (21, 'Jean', 'Rocha Santos', '(11) 11635-8593', '(11) 8699-4859', 'jean@hotmail.com', '2000-03-10', '247.437.575-48', 'Operador', 1, 32, 1000),
 (22, 'Samuel', 'de Oliveira', '(11) 93410-1869', '(11) 1234-1223', 'samuel@gmail.com', '2004-02-08', '534.733.998-50', 'Operador', 1, 28, 1000),
-(23, 'Lucas', 'Faes', '(11) 91234-1234', '(11) 1234-1234', 'lucas.faes@techsolutions.com', '2004-10-20', '123.123.123-12', 'Operador', 1, 27, 1000);
+(23, 'Lucas', 'Faes', '(11) 91234-1234', '(11) 1234-1234', 'lucas.faes@techsolutions.com', '2004-10-20', '123.123.123-12', 'Operador', 1, 27, 1000),
+(24, 'Pedro', 'Scortuzzi', '(11) 91234-1234', '(11) 1234-1234', 'pedro.scortuzzi@techsolutions.com', '2005-03-30', '123.123.123-12', 'Operador', 1, 29, 1000);
 
 INSERT INTO usuario (id_usuario, username, senha)
 VALUES
 (19, 'maria.guardiao', 'mar123123'),
 (20, 'vinicius.zirondi', 'vin123123'),
 (21, 'jean.santos', 'jea123123'),
-(22, 'samuel-op', 'sam123123'),
-(23, 'lucas.faes', 'luc123123');
+(22, 'samuel.batista', 'sam123123'),
+(23, 'lucas.faes', 'luc123123'),
+(24, 'pedro.scortuzzi', 'sco123123');
