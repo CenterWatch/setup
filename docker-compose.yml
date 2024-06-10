@@ -7,7 +7,7 @@ services:
       - "3307:3306"
 
   jar:
-    image: centerwatch/cwatching_jar:1.0
+    image: scortuzzi/jar:1.0
     container_name: jar_local
     hostname: desktop_003
     restart: always
