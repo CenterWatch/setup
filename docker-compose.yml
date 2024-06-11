@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: centerwatch/bd_local_jar:1.0
+    image: vinilope/cwdb:samuel
     container_name: container_sql_local
     restart: always
     ports:

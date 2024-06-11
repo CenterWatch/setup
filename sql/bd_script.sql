@@ -232,6 +232,16 @@ CREATE TABLE alerta (
     CONSTRAINT fk_reg_vol_alerta FOREIGN KEY (fk_reg_volume) REFERENCES registro_volume(id_registro_volume)
 );
 
+CREATE TABLE registroFuncionario (
+    idRegistro INT PRIMARY KEY,
+    inicioSessao datetime,
+    fimSessao datetime,
+    tempo_osiosidade int,
+    apontamento int,
+    tarefasTotal int,
+    tarefasConcluidas int
+);
+
 -- ENDEREÇOS
 INSERT INTO endereco (logradouro, cep, numero, bairro, complemento, cidade, uf)
 VALUES ('Rua A', '07124403', '673', 'Jardim Diogo', 'N/A', 'São Paulo', 'SP');
