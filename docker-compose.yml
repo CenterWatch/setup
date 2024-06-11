@@ -9,7 +9,7 @@ services:
   jar:
     image: lucasfaes/jar:1.0
     container_name: jar_local
-        hostname: desktop_001
+    hostname: desktop_001
     restart: always
     depends_on:
       - mysql
